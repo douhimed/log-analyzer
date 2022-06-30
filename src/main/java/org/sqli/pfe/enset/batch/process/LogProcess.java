@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 @Component
 public class LogProcess implements ItemProcessor<LogDto, LogEntity> {
+
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
     @Override
