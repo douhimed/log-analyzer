@@ -13,6 +13,7 @@ public class LogProcess implements ItemProcessor<LogDto, LogEntity> {
 
     @Override
     public LogEntity process(LogDto logDto) throws Exception {
+
         return LogEntity.builder()
                 .thread(logDto.getThread())
                 .date(dateFormat.parse(logDto.getDate()))
@@ -21,3 +22,4 @@ public class LogProcess implements ItemProcessor<LogDto, LogEntity> {
                 .build();
     }
 }
+
