@@ -1,10 +1,11 @@
 package org.sqli.pfe.enset.batch.config;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.step.tasklet.TaskletStep;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -40,15 +41,26 @@ public class LogAnalyserBatchConfig {
     @Autowired
     private ItemProcessor<LogDto, LogEntity> LogProcess;
 
+    @Autowired
+    private Tasklet dataBaseCleaningTasklet;
+
     @Bean
     public Job runJob() {
         return jobBuilderFactory
                 .get("job-logs")
-                .start(getStepImportLogs())
+                .start(dataBaseCleaningStep())
+                .next(getStepImportLogs())
                 .build();
     }
 
-    private TaskletStep getStepImportLogs() {
+    @Bean
+    public Step dataBaseCleaningStep() {
+        return stepBuilderFactory.get("cleaning-step")
+                .tasklet(dataBaseCleaningTasklet)
+                .build();
+    }
+
+    private Step getStepImportLogs() {
         return stepBuilderFactory
                 .get("step-logs")
                 .<LogDto, LogEntity>chunk(100)
