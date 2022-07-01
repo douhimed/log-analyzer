@@ -32,7 +32,7 @@ public class LogAnalyserBatchConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    private ItemWriter<LogEntity> LogWriter;
+    private ItemWriter<LogEntity> logWriter;
 
     @Value("classpath:/json.log")
     Resource inputFile;
@@ -54,7 +54,7 @@ public class LogAnalyserBatchConfig {
                 .<LogDto, LogEntity>chunk(100)
                 .reader(flatFileItemReader())
                 .processor(LogProcess)
-                .writer(LogWriter)
+                .writer(logWriter)
                 .build();
     }
 
