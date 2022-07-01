@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/logs")
+@RequestMapping({"/", "/logs"})
 public class LogController {
 
     private static final String LOGS_TEMPLATES = "/logs";
