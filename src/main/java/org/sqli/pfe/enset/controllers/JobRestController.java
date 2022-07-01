@@ -18,18 +18,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/jobs")
 public class JobRestController {
+
+    public static final String MESSAGE_RUNNING = "BATCH RUNNING...";
     @Autowired
     private JobLauncher jobLauncher;
     @Autowired
     private Job job;
 
     @GetMapping("/importlogs")
-    public ResponseEntity<BatchResponseDto> testApp() throws Exception {
+    public ResponseEntity<BatchResponseDto> startImportLogs() throws Exception {
         final Map<String, JobParameter> params = new HashMap<>();
         params.put("", new JobParameter(System.currentTimeMillis()));
         final JobExecution jobExecution = jobLauncher.run(job, new JobParameters(params));
         while (jobExecution.isRunning()) {
-            System.out.println("BATCH RUNNING...");
+            System.out.println(MESSAGE_RUNNING);
         }
         return ResponseEntity.ok(BatchResponseDto.builder()
                 .status(jobExecution.getStatus())
