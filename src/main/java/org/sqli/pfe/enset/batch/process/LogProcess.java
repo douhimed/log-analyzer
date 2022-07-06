@@ -5,8 +5,6 @@ import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
 import org.sqli.pfe.enset.utils.mappers.LogMapper;
 
-import java.text.SimpleDateFormat;
-
 @Component
 public class LogProcess implements ItemProcessor<LogDto, LogEntity> {
 
