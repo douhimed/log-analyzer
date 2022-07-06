@@ -9,6 +9,7 @@ import java.util.Date;
 @Table(name = "log")
 @Builder
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class LogEntity {

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LogDto {
+    private long id;
     private String date;
     private String thread;
     private String login;
