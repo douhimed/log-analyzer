@@ -15,15 +15,30 @@
 
         <hr/>
     </div>
-    <div class="row justify-content-between">
-        <div th:if="${#lists.isEmpty(logs)}" class="alert alert-warning" role="alert">
+    <div class="row justify-content-between" th:if="${#lists.isEmpty(logsPage.content)}">
+        <div class="alert alert-warning" role="alert">
             <div style="text-align:center"><p><b>No logs are imported into the database</b></p>
                 <button type="button" class="btn btn-success mt-4 mb-4">Import Logs</button>
             </div>
         </div>
     </div>
-    <div class="row justify-content-between">
-        <div th:if="${not #lists.isEmpty(logs)}">
+    <div class="row justify-content-between" th:if="${not #lists.isEmpty(logsPage.content)}">
+        <div class="col col-3">
+            <form>
+                <div class="row form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="Thread name">
+                    <label for="floatingInput">Threand</label>
+                </div>
+                <div class="row form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Login">
+                    <label for="floatingPassword">Login</label>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-lg btn-success">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col col-9">
             <table class="table table-striped">
                 <tr class="table-success">
                     <th>ID</th>
@@ -32,7 +47,7 @@
                     <th>LOGIN</th>
                     <th>DETAILS</th>
                 </tr>
-                <tr th:each="l:${logs.content}">
+                <tr th:each="l:${logsPage.content}">
                     <td th:text="${l.id}"></td>
                     <td th:text="${l.date}"></td>
                     <td th:text="${l.thread}"></td>
@@ -44,7 +59,7 @@
                 <nav>
                     <ul class="pagination">
                         <li class="page-item p-1" th:each="page,status:${pages}">
-                            <a th:class="${status.index==currentPage?'btn btn-success':'btn btn-outline-success'}"
+                            <a th:class="${status.index==currentPage ? 'btn btn-success' : 'btn btn-outline-success'}"
                                th:href="@{logs(page=${status.index}+1)}"
                                th:text="${status.index}+1"
                             ></a>

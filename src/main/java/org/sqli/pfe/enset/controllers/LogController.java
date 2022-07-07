@@ -21,11 +21,11 @@ public class LogController {
     @GetMapping
     public String getAllLogs(Model model,
                              @RequestParam(name="page",defaultValue ="1") int page){
-        Page<LogDto> logsDtos = this.logServices.findAll(PageRequest.of(page - 1,10));
-        model.addAttribute("logs", logsDtos);
+        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1,16));
+        model.addAttribute("logsPage", logDtoPage);
         model.addAttribute("currentPage",page - 1);
-        model.addAttribute("size",10);
-        model.addAttribute("pages",new int[logsDtos.getTotalPages()]);
+        model.addAttribute("size",16);
+        model.addAttribute("pages",new int[logDtoPage.getTotalPages()]);
         return LOGS_TEMPLATES + "/index";
     }
 
