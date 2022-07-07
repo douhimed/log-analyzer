@@ -32,7 +32,7 @@
                     <th>LOGIN</th>
                     <th>DETAILS</th>
                 </tr>
-                <tr th:each="l:${logs}">
+                <tr th:each="l:${logs.content}">
                     <td th:text="${l.id}"></td>
                     <td th:text="${l.date}"></td>
                     <td th:text="${l.thread}"></td>
@@ -43,9 +43,12 @@
             <div class="row">
                 <nav>
                     <ul class="pagination">
-                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">1</a></li>
-                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">2</a></li>
-                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">3</a></li>
+                        <li class="page-item p-1" th:each="page,status:${pages}">
+                            <a th:class="${status.index==currentPage?'btn btn-success':'btn btn-outline-success'}"
+                               th:href="@{logs(page=${status.index}+1)}"
+                               th:text="${status.index}+1"
+                            ></a>
+                        </li>
                     </ul>
                 </nav>
             </div>
