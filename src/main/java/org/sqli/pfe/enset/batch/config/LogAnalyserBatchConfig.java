@@ -86,7 +86,7 @@ public class LogAnalyserBatchConfig {
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(" - ");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("date", "thread", "login", "request");
+        lineTokenizer.setNames("date", "thread", "login", "body");
         lineMapper.setLineTokenizer(lineTokenizer);
         BeanWrapperFieldSetMapper<LogDto> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(LogDto.class);

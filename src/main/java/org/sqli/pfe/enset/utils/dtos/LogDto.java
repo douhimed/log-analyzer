@@ -14,5 +14,5 @@ public class LogDto {
     private String date;
     private String thread;
     private String login;
-    private String request;
+    private String body;
 }

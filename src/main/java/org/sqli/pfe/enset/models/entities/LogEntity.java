@@ -28,6 +28,6 @@ public class LogEntity {
     private String login;
 
     @Column(columnDefinition="text")
-    private String request;
+    private String body;
 
 }

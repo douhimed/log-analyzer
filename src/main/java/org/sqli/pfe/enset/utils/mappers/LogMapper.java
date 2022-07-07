@@ -14,7 +14,7 @@ public final class LogMapper {
                 .id(entity.getId())
                 .thread(entity.getThread())
                 .login(entity.getLogin())
-                .request(entity.getRequest())
+                .body(entity.getBody())
                 .date(entity.getDate().toString())
                 .build();
     }
@@ -24,7 +24,7 @@ public final class LogMapper {
                 .id(dto.getId())
                 .thread(dto.getThread())
                 .login(dto.getLogin())
-                .request(dto.getRequest())
+                .body(dto.getBody())
                 .date(DATE_FORMAT_PARSER.parse(dto.getDate()))
                 .build();
     }
