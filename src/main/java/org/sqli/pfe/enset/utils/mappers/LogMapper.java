@@ -1,8 +1,6 @@
 package org.sqli.pfe.enset.utils.mappers;
-
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -34,6 +32,5 @@ public final class LogMapper {
     public static List<LogDto> from(List<LogEntity> entities) {
         return entities.stream().map(LogMapper::from).collect(Collectors.toList());
     }
-
 }
 
