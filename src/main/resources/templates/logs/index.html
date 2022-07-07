@@ -12,43 +12,44 @@
 </nav>
 <div class="container">
     <div class="row justify-content-between">
-        <div class="col-2">
-            <button type="button" class="btn btn-success mt-4 mb-4">Import Logs</button>
-        </div>
+
         <hr/>
     </div>
     <div th:if="${#lists.isEmpty(logs)}" class="alert alert-warning" role="alert">
-        <div style="text-align:center">No logs are imported into the database</div>
+        <div style="text-align:center"><p><b>No logs are imported into the database</b></p>
+            <button type="button" class="btn btn-success mt-4 mb-4">Import Logs</button>
+        </div>
     </div>
     <div class="row">
         <div th:if="${not #lists.isEmpty(logs)}">
-            <table  class="table table-striped">
-            <tr class="table-success">
-                <th>ID</th>
-                <th>DATE</th>
-                <th>THREAD</th>
-                <th>LOGIN</th>
-                <th>DETAILS</th>
-            </tr>
-            <tr th:each="l:${logs}">
-                <td th:text="${l.id}"></td>
-                <td th:text="${l.date}"></td>
-                <td th:text="${l.thread}"></td>
-                <td th:text="${l.login}"></td>
-                <td></td>
-            </tr>
-        </table>
+            <table class="table table-striped">
+                <tr class="table-success">
+                    <th>ID</th>
+                    <th>DATE</th>
+                    <th>THREAD</th>
+                    <th>LOGIN</th>
+                    <th>DETAILS</th>
+                </tr>
+                <tr th:each="l:${logs}">
+                    <td th:text="${l.id}"></td>
+                    <td th:text="${l.date}"></td>
+                    <td th:text="${l.thread}"></td>
+                    <td th:text="${l.login}"></td>
+                    <td></td>
+                </tr>
+            </table>
             <div class="row">
-        <nav>
-            <ul class="pagination">
-                <li class="page-item p-1"><a class="btn btn-outline-success" href="#">1</a></li>
-                <li class="page-item p-1"><a class="btn btn-outline-success" href="#">2</a></li>
-                <li class="page-item p-1"><a class="btn btn-outline-success" href="#">3</a></li>
-            </ul>
-        </nav>
-    </div>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">1</a></li>
+                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">2</a></li>
+                        <li class="page-item p-1"><a class="btn btn-outline-success" href="#">3</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
