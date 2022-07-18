@@ -6,7 +6,7 @@ public enum LogMethodEnum {
 
     GET, POST, DELETE, PUT, PATCH;
 
-    public boolean isELigibleMethod(String value) {
+    public static boolean isELigibleMethod(String value) {
         return Arrays.stream(LogMethodEnum.values())
                 .anyMatch(method -> method.name().equalsIgnoreCase(value));
     }
