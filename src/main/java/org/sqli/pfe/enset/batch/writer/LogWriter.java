@@ -15,14 +15,16 @@ import java.util.stream.Collectors;
 @Component
 public class LogWriter implements ItemWriter<LogEntity> {
 
+    private static final String RESPONSE = "response";
+
     @Autowired
     private LogRepository logRepository;
 
     @Override
     public void write(List<? extends LogEntity> logs) throws Exception {
         List<? extends LogEntity> logsFiltred = logs.stream()
-                .filter(logEntity -> LogMethodEnum.isELigibleMethod(
-                        JsonUtils.getNodeValueAtPath(logEntity.getBody(), LogPathEnum.METHOD.getValue())))
+                .filter(logEntity -> logEntity.getValueAtPath(LogPathEnum.TYPE).equalsIgnoreCase(RESPONSE)
+                        || LogMethodEnum.isELigibleMethod(logEntity.getValueAtPath(LogPathEnum.METHOD)))
                 .collect(Collectors.toList());
         this.logRepository.saveAll(logsFiltred);
     }

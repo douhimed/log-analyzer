@@ -22,13 +22,16 @@ public final class LogMapper {
                 .login(entity.getLogin())
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
-                .bodyInfosDto(test(CommonUtils.from(JsonUtils.getNodeValueAtPath(entity.getBody(), LogPathEnum.STATUS.getValue()))))
+                .bodyInfosDto(test(entity.getBody()))
                 .build();
     }
 
-    private static BodyInfosDto test(int statutValue) {
+    private static BodyInfosDto test(String body) {
+
+        final String statutValue = JsonUtils.getNodeValueAtPath(body, LogPathEnum.STATUS.getValue());
+
         return BodyInfosDto.builder()
-                .statusValue(statutValue)
+                .statusValue(CommonUtils.isBlank(statutValue) ? "Request" : statutValue)
                 .responseStatutEnum(ResponseStatutEnum.fromStatus(statutValue))
                 .build();
     }

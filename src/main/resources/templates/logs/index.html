@@ -45,15 +45,17 @@
                     <th>DATE</th>
                     <th>THREAD</th>
                     <th>LOGIN</th>
-                    <th>DETAILS</th>
                     <th>STATUS</th>
+                    <th>DETAILS</th>
                 </tr>
                 <tr th:each="l:${logsPage.content}">
                     <td th:text="${l.id}"></td>
                     <td th:text="${l.date}"></td>
                     <td th:text="${l.thread}"></td>
                     <td th:text="${l.login}"></td>
-                    <td th:text="${l.status}"></td>
+                    <td>
+                        <span th:text="${l.bodyInfosDto.statusValue}"></span>
+                    </td>
                     <td></td>
                 </tr>
             </table>

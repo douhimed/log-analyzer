@@ -10,7 +10,7 @@ import org.sqli.pfe.enset.utils.enums.ResponseStatutEnum;
 @Setter
 public class BodyInfosDto {
 
-    private int statusValue;
+    private String statusValue;
     private ResponseStatutEnum responseStatutEnum;
 
 }
