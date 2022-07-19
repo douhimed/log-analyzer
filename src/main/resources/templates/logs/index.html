@@ -54,7 +54,8 @@
                     <td th:text="${l.thread}"></td>
                     <td th:text="${l.login}"></td>
                     <td>
-                        <span th:text="${l.bodyInfosDto.statusValue}"></span>
+                        <span th:class="'badge badge-success'"
+                              th:text="${l.bodyInfosDto.statusValue}"></span>
                     </td>
                     <td></td>
                 </tr>
