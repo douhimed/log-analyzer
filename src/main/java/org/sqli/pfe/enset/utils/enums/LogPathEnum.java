@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum LogPathEnum {
     METHOD("/method"),
     STATUS("/status"),
-    TYPE("/type");
+    TYPE("/type"),
+    CORRELATION("/correlation");
 
     final String value;
 

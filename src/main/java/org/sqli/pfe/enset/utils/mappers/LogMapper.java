@@ -1,6 +1,7 @@
 package org.sqli.pfe.enset.utils.mappers;
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+import org.sqli.pfe.enset.utils.enums.LogPathEnum;
 
 
 import java.text.ParseException;
@@ -18,6 +19,7 @@ public final class LogMapper {
                 .login(entity.getLogin())
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
+                .correlation(entity.getValueAtPath(LogPathEnum.CORRELATION))
                 .bodyInfosDto(LogInfoMapper.from(entity))
                 .build();
     }
