@@ -45,7 +45,8 @@
                     <th>DATE</th>
                     <th>THREAD</th>
                     <th>LOGIN</th>
-                    <th>STATUS</th>
+                    <th>TYPE/STATUS</th>
+                    <th>CORRELATION</th>
                     <th>DETAILS</th>
                 </tr>
                 <tr th:each="l:${logsPage.content}">
@@ -57,6 +58,7 @@
                         <span th:class="'badge bg-' + ${l.bodyInfosDto.responseStatutEnum.value}"
                               th:text="${l.bodyInfosDto.statusValue}"></span>
                     </td>
+                    <td th:text="${l.correlation}"></td>
                     <td></td>
                 </tr>
             </table>
