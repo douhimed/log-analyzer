@@ -31,9 +31,10 @@ public class LogEntity {
 
     @Column(columnDefinition="text")
     private String body;
+
     @Transient
     public String getValueAtPath(LogPathEnum pathEnum) {
-        return JsonUtils.getNodeValueAtPath(getBody(),pathEnum.getValue());
+        return JsonUtils.getNodeValueAtPath(getBody(), pathEnum.getValue());
     }
 
 }

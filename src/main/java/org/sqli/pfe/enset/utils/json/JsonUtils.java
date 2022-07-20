@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.Optional;
 
 import static org.sqli.pfe.enset.utils.constants.CommonConstants.EMPTY_STRING;

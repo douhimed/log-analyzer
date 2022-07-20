@@ -15,4 +15,6 @@ public class LogDto {
     private String thread;
     private String login;
     private String body;
+    private BodyInfosDto bodyInfosDto;
+
 }

@@ -1,6 +1,8 @@
 package org.sqli.pfe.enset.utils.mappers;
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -16,6 +18,7 @@ public final class LogMapper {
                 .login(entity.getLogin())
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
+                .bodyInfosDto(LogInfoMapper.from(entity))
                 .build();
     }
 
