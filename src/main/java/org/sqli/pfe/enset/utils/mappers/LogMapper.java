@@ -1,4 +1,5 @@
 package org.sqli.pfe.enset.utils.mappers;
+import org.json.JSONObject;
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
 import org.sqli.pfe.enset.utils.enums.LogPathEnum;

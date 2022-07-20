@@ -13,8 +13,10 @@ public final class LogInfoMapper {
         final String statutValue = logEntity.getValueAtPath(LogPathEnum.STATUS);
 
         return BodyInfosDto.builder()
-                .statusValue(CommonUtils.isBlank(statutValue) ? CommonConstants.REQUEST : statutValue)
-                .responseStatutEnum(ResponseStatutEnum.fromStatus(statutValue))
+                .statut(CommonUtils.isBlank(statutValue) ? CommonConstants.REQUEST : statutValue)
+                .statutEnum(ResponseStatutEnum.fromStatus(statutValue))
+                .method(logEntity.getValueAtPath(LogPathEnum.METHOD))
+                .userName(logEntity.getValueAtPath(LogPathEnum.USER_NAME))
                 .build();
 
     }

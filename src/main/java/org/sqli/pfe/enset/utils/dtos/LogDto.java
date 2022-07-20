@@ -1,9 +1,11 @@
 package org.sqli.pfe.enset.utils.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONObject;
 
 @Builder
 @Data
@@ -14,8 +16,8 @@ public class LogDto {
     private String date;
     private String thread;
     private String login;
+    @JsonIgnore
     private String body;
     private String correlation;
     private BodyInfosDto bodyInfosDto;
-
 }

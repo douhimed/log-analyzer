@@ -52,4 +52,11 @@ public class LogServicesImpl implements LogServices {
         return this.logRepository.findAll(pageable)
                 .map(LogMapper::from);
     }
+
+    @Override
+    public LogDto findById(long id) {
+        return this.logRepository.findById(id)
+                .map(LogMapper::from)
+                .orElse(null);
+    }
 }

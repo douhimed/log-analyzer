@@ -7,7 +7,8 @@ public enum LogPathEnum {
     METHOD("/method"),
     STATUS("/status"),
     TYPE("/type"),
-    CORRELATION("/correlation");
+    CORRELATION("/correlation"),
+    USER_NAME("/username");
 
     final String value;
 

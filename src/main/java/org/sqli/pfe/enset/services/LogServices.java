@@ -10,4 +10,5 @@ public interface LogServices {
 
     Page<LogDto> findAll(Pageable pageable);
 
+    LogDto findById(long id);
 }
