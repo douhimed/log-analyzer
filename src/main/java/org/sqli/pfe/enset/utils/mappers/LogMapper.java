@@ -1,11 +1,7 @@
 package org.sqli.pfe.enset.utils.mappers;
 import org.sqli.pfe.enset.models.entities.LogEntity;
-import org.sqli.pfe.enset.utils.CommonUtils;
-import org.sqli.pfe.enset.utils.dtos.BodyInfosDto;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
-import org.sqli.pfe.enset.utils.enums.LogPathEnum;
-import org.sqli.pfe.enset.utils.enums.ResponseStatutEnum;
-import org.sqli.pfe.enset.utils.json.JsonUtils;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,17 +18,7 @@ public final class LogMapper {
                 .login(entity.getLogin())
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
-                .bodyInfosDto(test(entity.getBody()))
-                .build();
-    }
-
-    private static BodyInfosDto test(String body) {
-
-        final String statutValue = JsonUtils.getNodeValueAtPath(body, LogPathEnum.STATUS.getValue());
-
-        return BodyInfosDto.builder()
-                .statusValue(CommonUtils.isBlank(statutValue) ? "Request" : statutValue)
-                .responseStatutEnum(ResponseStatutEnum.fromStatus(statutValue))
+                .bodyInfosDto(LogInfoMapper.from(entity))
                 .build();
     }
 

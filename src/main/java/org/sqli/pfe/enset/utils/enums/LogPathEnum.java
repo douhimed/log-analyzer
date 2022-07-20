@@ -8,7 +8,7 @@ public enum LogPathEnum {
     STATUS("/status"),
     TYPE("/type");
 
-    String value;
+    final String value;
 
     LogPathEnum(String value) {
         this.value = value;
