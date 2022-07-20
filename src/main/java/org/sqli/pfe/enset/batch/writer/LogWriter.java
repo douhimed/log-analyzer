@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 @Component
 public class LogWriter implements ItemWriter<LogEntity> {
 
-    private static final String RESPONSE = "response";
-
     @Autowired
     private LogRepository logRepository;
 
