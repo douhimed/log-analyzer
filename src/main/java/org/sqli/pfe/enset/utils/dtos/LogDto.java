@@ -19,5 +19,6 @@ public class LogDto {
     @JsonIgnore
     private String body;
     private String correlation;
+    private String url;
     private BodyInfosDto bodyInfosDto;
 }

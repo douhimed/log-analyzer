@@ -23,7 +23,7 @@ public class LogRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LogDto> getById(@PathVariable long id) {
+    public ResponseEntity<LogDto> getById(@PathVariable long id) throws Exception {
         return ResponseEntity.ok(this.logServices.findById(id));
     }
 }

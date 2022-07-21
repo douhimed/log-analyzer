@@ -17,6 +17,8 @@ public final class LogInfoMapper {
                 .statutEnum(ResponseStatutEnum.fromStatus(statutValue))
                 .method(logEntity.getValueAtPath(LogPathEnum.METHOD))
                 .userName(logEntity.getValueAtPath(LogPathEnum.USER_NAME))
+                .identifiant(logEntity.getValueAtPath(LogPathEnum.IDENTIFIANT))
+                .organisationId(logEntity.getValueAtPath(LogPathEnum.ORGANISATION_ID))
                 .build();
 
     }
