@@ -55,7 +55,7 @@ public class LogServicesImpl implements LogServices {
     }
 
     @Override
-    public LogDto findById(long id) {
+    public LogDto findById(long id) throws DataNotFoundException {
         return this.logRepository.findById(id)
                 .map(LogMapper::from)
                 .orElseThrow(() -> new DataNotFoundException("Log Not Found"));
