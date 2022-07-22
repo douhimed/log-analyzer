@@ -8,7 +8,10 @@ public enum LogPathEnum {
     STATUS("/status"),
     TYPE("/type"),
     CORRELATION("/correlation"),
-    USER_NAME("/username");
+    USER_NAME("/body/username"),
+    URL("/url"),
+    IDENTIFIANT("/body/identifiant"),
+    ORGANISATION_ID("/body/organisationId");
 
     final String value;
 

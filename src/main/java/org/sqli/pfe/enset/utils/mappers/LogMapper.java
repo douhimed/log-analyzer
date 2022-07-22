@@ -21,6 +21,7 @@ public final class LogMapper {
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
                 .correlation(entity.getValueAtPath(LogPathEnum.CORRELATION))
+                .url(entity.getValueAtPath(LogPathEnum.URL))
                 .bodyInfosDto(LogInfoMapper.from(entity))
                 .build();
     }

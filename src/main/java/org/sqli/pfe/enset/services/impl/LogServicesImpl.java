@@ -10,6 +10,7 @@ import org.sqli.pfe.enset.repositories.LogRepository;
 import org.sqli.pfe.enset.services.LogServices;
 import org.sqli.pfe.enset.utils.dtos.BatchResponseDto;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+import org.sqli.pfe.enset.utils.exceptions.DataNotFoundException;
 import org.sqli.pfe.enset.utils.mappers.LogMapper;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,9 +55,9 @@ public class LogServicesImpl implements LogServices {
     }
 
     @Override
-    public LogDto findById(long id) {
+    public LogDto findById(long id) throws DataNotFoundException {
         return this.logRepository.findById(id)
                 .map(LogMapper::from)
-                .orElse(null);
+                .orElseThrow(() -> new DataNotFoundException("Log Not Found"));
     }
 }

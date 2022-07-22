@@ -16,4 +16,6 @@ public class BodyInfosDto {
     private ResponseStatutEnum statutEnum;
     private String method;
     private String userName;
+    private String identifiant;
+    private String organisationId;
 }
