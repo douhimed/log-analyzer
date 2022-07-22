@@ -62,7 +62,7 @@
                     </td>
                     <td th:text="${l.correlation}"></td>
                     <td>
-                        <a th:href="'http://localhost:8080/rest/logs/'+ ${l.id}" target="_blank">
+                        <a th:href="${url} + '/'+ ${l.id}" target="_blank">
                             <button type="button" class="btn btn-success">Details</button></a>
                     </td>
                     <td></td>

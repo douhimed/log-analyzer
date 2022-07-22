@@ -7,8 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.sqli.pfe.enset.services.LogServices;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping({"/", "/logs"})
@@ -20,12 +23,20 @@ public class LogController {
     private LogServices logServices;
     @GetMapping
     public String getAllLogs(Model model,
-                             @RequestParam(name="page",defaultValue ="1") int page){
+                             @RequestParam(name="page",defaultValue ="1") int page,
+                             HttpServletRequest request){
         Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1,16));
         model.addAttribute("logsPage", logDtoPage);
         model.addAttribute("currentPage",page - 1);
         model.addAttribute("size",16);
         model.addAttribute("pages",new int[logDtoPage.getTotalPages()]);
+
+        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
+                .replacePath(null)
+                .build()
+                .toUriString();
+        model.addAttribute("url", baseUrl + "/rest/logs");
+
         return LOGS_TEMPLATES + "/index";
     }
 
