@@ -1,5 +1,4 @@
 package org.sqli.pfe.enset.utils.mappers;
-import org.json.JSONObject;
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
 import org.sqli.pfe.enset.utils.enums.LogPathEnum;
@@ -7,23 +6,35 @@ import org.sqli.pfe.enset.utils.enums.LogPathEnum;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.BiConsumer;
 
 public final class LogMapper {
+
     private static final SimpleDateFormat DATE_FORMAT_PARSER = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
+    private static final List<BiConsumer<LogDto, LogEntity>> FIELDS_TO_MAP;
+
+    static {
+        FIELDS_TO_MAP = new ArrayList<>();
+        FIELDS_TO_MAP.add((dto, entity) -> dto.setCorrelation(entity.getValueAtPath(LogPathEnum.CORRELATION)));
+        FIELDS_TO_MAP.add((dto, entity) -> dto.setUrl(entity.getValueAtPath(LogPathEnum.URL)));
+    }
+
     public static LogDto from(LogEntity entity) {
-        return LogDto.builder()
+        final LogDto logDto = LogDto.builder()
                 .id(entity.getId())
                 .thread(entity.getThread())
                 .login(entity.getLogin())
                 .body(entity.getBody())
                 .date(entity.getDate().toString())
-                .correlation(entity.getValueAtPath(LogPathEnum.CORRELATION))
-                .url(entity.getValueAtPath(LogPathEnum.URL))
                 .bodyInfosDto(LogInfoMapper.from(entity))
                 .build();
+
+        FIELDS_TO_MAP.forEach(consumer -> consumer.accept(logDto, entity));
+
+        return logDto;
     }
 
     public static LogEntity from(LogDto dto) throws ParseException {
@@ -36,8 +47,5 @@ public final class LogMapper {
                 .build();
     }
 
-    public static List<LogDto> from(List<LogEntity> entities) {
-        return entities.stream().map(LogMapper::from).collect(Collectors.toList());
-    }
 }
 
