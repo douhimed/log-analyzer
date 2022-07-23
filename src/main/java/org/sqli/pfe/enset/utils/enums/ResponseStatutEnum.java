@@ -2,7 +2,7 @@ package org.sqli.pfe.enset.utils.enums;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.sqli.pfe.enset.utils.CommonUtils;
+import org.sqli.pfe.enset.utils.common.CommonUtils;
 
 @Getter
 @Slf4j

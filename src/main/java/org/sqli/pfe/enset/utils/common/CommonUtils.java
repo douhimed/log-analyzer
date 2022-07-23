@@ -1,4 +1,4 @@
-package org.sqli.pfe.enset.utils;
+package org.sqli.pfe.enset.utils.common;
 
 import java.util.Objects;
 

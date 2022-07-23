@@ -1,4 +1,5 @@
 package org.sqli.pfe.enset.services.impl;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -12,9 +13,12 @@ import org.sqli.pfe.enset.utils.dtos.BatchResponseDto;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
 import org.sqli.pfe.enset.utils.exceptions.DataNotFoundException;
 import org.sqli.pfe.enset.utils.mappers.LogMapper;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static org.sqli.pfe.enset.utils.exceptions.DataNotFoundException.DataNotFoundRaisons.*;
 
 @Service
 @Slf4j
@@ -58,6 +62,6 @@ public class LogServicesImpl implements LogServices {
     public LogDto findById(long id) throws DataNotFoundException {
         return this.logRepository.findById(id)
                 .map(LogMapper::from)
-                .orElseThrow(() -> new DataNotFoundException("Log Not Found"));
+                .orElseThrow(() -> new DataNotFoundException(String.format(ID_NOT_FOUND.getReason(), id)));
     }
 }

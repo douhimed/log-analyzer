@@ -1,7 +1,7 @@
 package org.sqli.pfe.enset.utils.mappers;
 
 import org.sqli.pfe.enset.models.entities.LogEntity;
-import org.sqli.pfe.enset.utils.CommonUtils;
+import org.sqli.pfe.enset.utils.common.CommonUtils;
 import org.sqli.pfe.enset.utils.constants.CommonConstants;
 import org.sqli.pfe.enset.utils.dtos.BodyInfosDto;
 import org.sqli.pfe.enset.utils.enums.LogPathEnum;
