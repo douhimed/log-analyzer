@@ -10,7 +10,8 @@ public class DataNotFoundException extends RuntimeException {
 
     @Getter
     public enum DataNotFoundRaisons {
-        ID_NOT_FOUND("Log with the given id %s not found");
+        ID_NOT_FOUND("Log with the given id {%s} not found"),
+        PAGE_NOT_FOUND("Page with given number {%s} not exist");
 
         final String reason;
 

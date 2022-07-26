@@ -1,4 +1,5 @@
 package org.sqli.pfe.enset.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,22 +22,26 @@ public class LogController {
 
     @Autowired
     private LogServices logServices;
+
     @GetMapping
     public String getAllLogs(Model model,
-                             @RequestParam(name="page",defaultValue ="1") int page,
-                             HttpServletRequest request){
-        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1,16));
-        model.addAttribute("logsPage", logDtoPage);
-        model.addAttribute("currentPage",page - 1);
-        model.addAttribute("size",16);
-        model.addAttribute("pages",new int[logDtoPage.getTotalPages()]);
+                             @RequestParam(name = "page", defaultValue = "1") int page,
+                             HttpServletRequest request) {
+        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1, 12));
+        mapperModel(model, page, logDtoPage, request);
+        return calculPage(page, logDtoPage);
+    }
 
-        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request)
-                .replacePath(null)
-                .build()
-                .toUriString();
-        model.addAttribute("url", baseUrl);
-        return page - 1 > logDtoPage.getTotalPages() ? LOGS_TEMPLATES + "/not_found" : LOGS_TEMPLATES + "/index";
+    private String calculPage(int page, Page<LogDto> logDtoPage) {
+        return LOGS_TEMPLATES + (page - 1 > logDtoPage.getTotalPages() ? "/not_found" : "/index");
+    }
+
+    private void mapperModel(Model model, int page, Page<LogDto> logDtoPage, HttpServletRequest request) {
+        model.addAttribute("logsPage", logDtoPage);
+        model.addAttribute("currentPage", page - 1);
+        model.addAttribute("size", 16);
+        model.addAttribute("pages", new int[logDtoPage.getTotalPages()]);
+        model.addAttribute("url", ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString());
     }
 
 }
