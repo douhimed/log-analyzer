@@ -18,7 +18,9 @@
     <div class="row justify-content-between" th:if="${#lists.isEmpty(logsPage.content)}">
         <div class="alert alert-warning" role="alert">
             <div style="text-align:center"><p><b>No logs are imported into the database</b></p>
-                <button type="button" class="btn btn-success mt-4 mb-4">Import Logs</button>
+                <a href="http://localhost:8080/rest/logs/importlogs">
+                    <button type="button" class="btn btn-success mt-4 mb-4">Import Logs</button>
+                </a>
             </div>
         </div>
     </div>
@@ -34,7 +36,8 @@
                     <label for="floatingPassword">Login</label>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-lg btn-success">Search</button>
+                   <a href= "http://localhost:8080/rest/logs/importlogs" >
+                       <button type="button" class="btn btn-lg btn-success">Search</button></a>
                 </div>
             </form>
         </div>
