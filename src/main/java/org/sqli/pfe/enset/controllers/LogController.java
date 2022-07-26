@@ -35,9 +35,8 @@ public class LogController {
                 .replacePath(null)
                 .build()
                 .toUriString();
-        model.addAttribute("url", baseUrl + "/rest/logs");
-
-        return LOGS_TEMPLATES + "/index";
+        model.addAttribute("url", baseUrl);
+        return page - 1 > logDtoPage.getTotalPages() ? LOGS_TEMPLATES + "/not_found" : LOGS_TEMPLATES + "/index";
     }
 
 }
