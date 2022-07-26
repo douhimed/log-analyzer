@@ -21,6 +21,7 @@ public class LogController {
 
     @Autowired
     private LogServices logServices;
+
     @GetMapping
     public String getAllLogs(Model model,
                              @RequestParam(name="page",defaultValue ="1") int page,
