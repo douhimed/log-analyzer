@@ -25,7 +25,7 @@ public class LogController {
     public String getAllLogs(Model model,
                              @RequestParam(name="page",defaultValue ="1") int page,
                              HttpServletRequest request){
-        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1,16));
+        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1,12));
         model.addAttribute("logsPage", logDtoPage);
         model.addAttribute("currentPage",page - 1);
         model.addAttribute("size",16);
