@@ -12,4 +12,7 @@ public final class CommonUtils {
         return Objects.isNull(value) || value.trim().length() == 0;
     }
 
+    public static boolean isNotBlank(String value) {
+        return !isBlank(value);
+    }
 }
