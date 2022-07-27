@@ -26,17 +26,17 @@
     </div>
     <div class="row justify-content-between" th:if="${not #lists.isEmpty(logsPage.content)}">
         <div class="col col-3">
-            <form>
+            <form th:action="@{logs}" method="get">
                 <div class="row form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="Thread name">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Thread name" name="thread">
                     <label for="floatingInput">Thread</label>
                 </div>
                 <div class="row form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Login">
+                    <input type="text" class="form-control" id="floatingPassword" placeholder="Login" name="login">
                     <label for="floatingPassword">Login</label>
                 </div>
                 <div class="row">
-                       <button type="button" class="btn btn-lg btn-success">Search</button>
+                       <button class="btn btn-lg btn-success">Search</button>
                 </div>
             </form>
         </div>

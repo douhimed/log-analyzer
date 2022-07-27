@@ -1,6 +1,7 @@
 package org.sqli.pfe.enset.utils.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.micrometer.core.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

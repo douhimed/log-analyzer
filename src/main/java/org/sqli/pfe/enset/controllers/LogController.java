@@ -1,5 +1,4 @@
 package org.sqli.pfe.enset.controllers;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.sqli.pfe.enset.services.LogServices;
+import org.sqli.pfe.enset.utils.common.CommonUtils;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+import org.sqli.pfe.enset.utils.dtos.SearchParamDto;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,10 +27,18 @@ public class LogController {
     @GetMapping
     public String getAllLogs(Model model,
                              @RequestParam(name = "page", defaultValue = "1") int page,
-                             HttpServletRequest request) {
-        Page<LogDto> logDtoPage = this.logServices.findAll(PageRequest.of(page - 1, 12));
+                             HttpServletRequest request,
+                             @RequestParam(required = false) String login,
+                             @RequestParam(required = false) String thread) {
+        final Page<LogDto> logDtoPage = getPageOfLogs(login, thread, PageRequest.of(page - 1, 12));
         mapperModel(model, page, logDtoPage, request);
         return calculPage(page, logDtoPage);
+    }
+
+    private Page<LogDto> getPageOfLogs(String login, String thread, PageRequest pageable) {
+        return CommonUtils.isBlank(thread) && CommonUtils.isBlank(login)
+                ? this.logServices.getAllLogs(pageable)
+                : this.logServices.getBySearchParams(pageable, SearchParamDto.builder().login(login).thread(thread).build());
     }
 
     private String calculPage(int page, Page<LogDto> logDtoPage) {

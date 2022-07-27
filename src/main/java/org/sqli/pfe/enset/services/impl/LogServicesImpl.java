@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.repositories.LogRepository;
 import org.sqli.pfe.enset.services.LogServices;
 import org.sqli.pfe.enset.utils.dtos.BatchResponseDto;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+import org.sqli.pfe.enset.utils.dtos.SearchParamDto;
 import org.sqli.pfe.enset.utils.exceptions.DataNotFoundException;
 import org.sqli.pfe.enset.utils.mappers.LogMapper;
 
@@ -53,9 +55,22 @@ public class LogServicesImpl implements LogServices {
     }
 
     @Override
-    public Page<LogDto> findAll(Pageable pageable) {
+    public Page<LogDto> getAllLogs(Pageable pageable) {
         return this.logRepository.findAll(pageable)
                 .map(LogMapper::from);
+    }
+
+    @Override
+    public Page<LogDto> getBySearchParams(Pageable pageable, SearchParamDto searchParamDto) {
+        Page<LogEntity> searchResults = null;
+        if(searchParamDto.isFull()) {
+            searchResults = this.logRepository.findByLoginContainingOrThreadContaining(searchParamDto.getLogin(), searchParamDto.getThread(), pageable);
+        } else if(searchParamDto.isLoginResigned()) {
+            searchResults = this.logRepository.findByLoginContaining(searchParamDto.getLogin(), pageable);
+        } else if(searchParamDto.isThreadResigned()) {
+            searchResults = this.logRepository.findByThreadContaining(searchParamDto.getThread(), pageable);
+        }
+        return searchResults.map(LogMapper::from);
     }
 
     @Override
