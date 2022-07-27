@@ -8,8 +8,8 @@ import org.sqli.pfe.enset.models.entities.LogEntity;
 
 @Repository
 public interface LogRepository extends JpaRepository<LogEntity, Long> {
-    public Page<LogEntity> findByLoginContainingOrThreadContaining(String login, String thread, Pageable pageable);
-    public Page<LogEntity> findByLoginContaining(String login, Pageable pageable);
-    public Page<LogEntity> findByThreadContaining(String thread, Pageable pageable);
+     Page<LogEntity> findByLoginContainingOrThreadContaining(String login, String thread, Pageable pageable);
+     Page<LogEntity> findByLoginContaining(String login, Pageable pageable);
+     Page<LogEntity> findByThreadContaining(String thread, Pageable pageable);
 
 }
