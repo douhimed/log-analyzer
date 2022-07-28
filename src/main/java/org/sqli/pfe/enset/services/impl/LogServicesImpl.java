@@ -64,7 +64,7 @@ public class LogServicesImpl implements LogServices {
     public Page<LogDto> getBySearchParams(Pageable pageable, SearchParamDto searchParamDto) {
         Page<LogEntity> searchResults = null;
         if(searchParamDto.isFull()) {
-            searchResults = this.logRepository.findByLoginContainingOrThreadContaining(searchParamDto.getLogin(), searchParamDto.getThread(), pageable);
+            searchResults = this.logRepository.findByLoginContainingAndThreadContaining(searchParamDto.getLogin(), searchParamDto.getThread(), pageable);
         } else if(searchParamDto.isLoginResigned()) {
             searchResults = this.logRepository.findByLoginContaining(searchParamDto.getLogin(), pageable);
         } else if(searchParamDto.isThreadResigned()) {
