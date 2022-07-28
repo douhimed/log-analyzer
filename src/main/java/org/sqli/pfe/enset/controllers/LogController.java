@@ -31,7 +31,7 @@ public class LogController {
                              @RequestParam(required = false) String login,
                              @RequestParam(required = false) String thread) {
         final Page<LogDto> logDtoPage = getPageOfLogs(login, thread, PageRequest.of(page - 1, 12));
-        mapperModel(model, page, logDtoPage, request);
+        mapperModel(model, page, logDtoPage, request, CommonUtils.isNotBlank(thread) || CommonUtils.isNotBlank(login));
         return calculPage(page, logDtoPage);
     }
 
@@ -45,8 +45,9 @@ public class LogController {
         return LOGS_TEMPLATES + (page - 1 > logDtoPage.getTotalPages() ? "/not_found" : "/index");
     }
 
-    private void mapperModel(Model model, int page, Page<LogDto> logDtoPage, HttpServletRequest request) {
+    private void mapperModel(Model model, int page, Page<LogDto> logDtoPage, HttpServletRequest request, boolean estModeSearch) {
         model.addAttribute("logsPage", logDtoPage);
+        model.addAttribute("search", estModeSearch);
         model.addAttribute("currentPage", page - 1);
         model.addAttribute("size", 16);
         model.addAttribute("pages", new int[logDtoPage.getTotalPages()]);

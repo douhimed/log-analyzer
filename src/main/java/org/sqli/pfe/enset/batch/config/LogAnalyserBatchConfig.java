@@ -17,9 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.sqli.pfe.enset.models.entities.LogEntity;
 import org.sqli.pfe.enset.utils.dtos.LogDto;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 @Configuration
@@ -35,9 +39,8 @@ public class LogAnalyserBatchConfig {
     @Autowired
     private ItemWriter<LogEntity> logWriter;
 
-    @Value("classpath:/json.log")
-    Resource inputFile;
-
+    @Value("${file.log.path}")
+    private String filePath;
     @Autowired
     private ItemProcessor<LogDto, LogEntity> LogProcess;
 
@@ -45,7 +48,7 @@ public class LogAnalyserBatchConfig {
     private Tasklet dataBaseCleaningTasklet;
 
     @Bean
-    public Job runJob() {
+    public Job runJob() throws FileNotFoundException {
         return jobBuilderFactory
                 .get("job-logs")
                 .start(dataBaseCleaningStep())
@@ -60,7 +63,7 @@ public class LogAnalyserBatchConfig {
                 .build();
     }
 
-    private Step getStepImportLogs() {
+    private Step getStepImportLogs() throws FileNotFoundException {
         return stepBuilderFactory
                 .get("step-logs")
                 .<LogDto, LogEntity>chunk(100)
@@ -71,9 +74,9 @@ public class LogAnalyserBatchConfig {
     }
 
     @Bean
-    public FlatFileItemReader<LogDto> flatFileItemReader() {
+    public FlatFileItemReader<LogDto> flatFileItemReader() throws FileNotFoundException {
         FlatFileItemReader<LogDto> itemReader = new FlatFileItemReader<>();
-        itemReader.setResource(inputFile);
+        itemReader.setResource(new InputStreamResource(new FileInputStream(filePath)));
         itemReader.setName("Log-Reader");
         itemReader.setLineMapper(lineMapper());
         return itemReader;
