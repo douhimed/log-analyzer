@@ -42,7 +42,7 @@ public class LogController {
     }
 
     private String calculPage(int page, Page<LogDto> logDtoPage) {
-        return LOGS_TEMPLATES + (page - 1 > logDtoPage.getTotalPages() ? "/not_found" : "/index");
+        return LOGS_TEMPLATES + (page - 1 >= logDtoPage.getTotalPages() ? "/not_found" : "/index");
     }
 
     private void mapperModel(Model model, int page, Page<LogDto> logDtoPage, HttpServletRequest request, boolean estModeSearch) {
