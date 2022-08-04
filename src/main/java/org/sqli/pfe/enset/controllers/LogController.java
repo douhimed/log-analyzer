@@ -31,8 +31,9 @@ public class LogController {
                              @RequestParam(required = false) String login,
                              @RequestParam(required = false) String thread) {
         final Page<LogDto> logDtoPage = getPageOfLogs(login, thread, PageRequest.of(page - 1, 12));
-        mapperModel(model, page, logDtoPage, request, CommonUtils.isNotBlank(thread) || CommonUtils.isNotBlank(login));
-        return calculPage(page, logDtoPage);
+        boolean estModeSearch = CommonUtils.isNotBlank(thread) || CommonUtils.isNotBlank(login);
+        mapperModel(model, page, logDtoPage, request, estModeSearch);
+        return calculPage(page, logDtoPage, estModeSearch);
     }
 
     private Page<LogDto> getPageOfLogs(String login, String thread, PageRequest pageable) {
@@ -41,8 +42,8 @@ public class LogController {
                 : this.logServices.getBySearchParams(pageable, SearchParamDto.builder().login(login).thread(thread).build());
     }
 
-    private String calculPage(int page, Page<LogDto> logDtoPage) {
-        return LOGS_TEMPLATES + (page - 1 > logDtoPage.getTotalPages() ? "/not_found" : "/index");
+    private String calculPage(int page, Page<LogDto> logDtoPage, boolean estModeSearch) {
+        return LOGS_TEMPLATES + (page - 1 > logDtoPage.getTotalPages() && !estModeSearch ? "/not_found" : "/index");
     }
 
     private void mapperModel(Model model, int page, Page<LogDto> logDtoPage, HttpServletRequest request, boolean estModeSearch) {
